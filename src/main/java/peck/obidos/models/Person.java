@@ -19,4 +19,9 @@ public class Person {
     public String getNick() {
         return nick;
     }
+    
+    @Override
+    public String toString() {
+        return nick;
+    }
 }

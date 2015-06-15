@@ -14,6 +14,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import peck.obidos.controllers.MainController;
 import peck.obidos.domain.Listener;
 import peck.obidos.models.MainModel;
+import peck.obidos.models.Person;
 import peck.obidos.models.messages.Message;
 
 /**
@@ -125,6 +126,12 @@ public final class MainView extends VerticalLayout implements View, Listener {
         // update nickname
         if(mainModel.getUser() != null) {
             lblNick.setValue(mainModel.getUser().getNick());
+        }
+        
+        // update people
+        lstPeople.clear();
+        for(Person p: mainModel.getPeople().values()) {
+            lstPeople.addItem(p);
         }
     }
     
