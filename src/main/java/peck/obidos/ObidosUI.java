@@ -11,10 +11,12 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import peck.obidos.controllers.ConfigController;
+import peck.obidos.controllers.ConnectController;
 import peck.obidos.controllers.MainController;
 import peck.obidos.domain.server.Server;
 import peck.obidos.models.MainModel;
 import peck.obidos.views.ConfigView;
+import peck.obidos.views.ConnectView;
 import peck.obidos.views.MainView;
 
 /**
@@ -42,6 +44,8 @@ public class ObidosUI extends UI {
                 new MainView(new MainController(model, navigator), model));
         navigator.addView("config",
                 new ConfigView(new ConfigController(model, navigator), model));
+        navigator.addView("connect",
+                new ConnectView(new ConnectController(navigator)));
         
         // navigate to initial view
         navigator.navigateTo("config");

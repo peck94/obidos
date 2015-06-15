@@ -1,6 +1,7 @@
 package peck.obidos.controllers;
 
 import com.vaadin.navigator.Navigator;
+import com.vaadin.ui.Notification;
 import peck.obidos.models.MainModel;
 import peck.obidos.models.Person;
 
@@ -21,10 +22,11 @@ public class ConfigController extends Controller {
      * Save the config.
      * @param nick Nickname to use
      */
-    public void save(String nick) {
+    public void save(String nick, int port) {
         // update model
         Person user = new Person(nick);
         model.setUser(user);
+        model.setPort(port);
         
         // go back
         getNavigator().navigateTo("main");

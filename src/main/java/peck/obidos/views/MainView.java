@@ -42,6 +42,7 @@ public final class MainView extends VerticalLayout implements View, Listener {
         
         HorizontalLayout hl = new HorizontalLayout();
         HorizontalLayout hl2 = new HorizontalLayout();
+        HorizontalLayout hl3 = new HorizontalLayout();
         hl2.setSizeFull();
         
         // people in chat
@@ -84,8 +85,20 @@ public final class MainView extends VerticalLayout implements View, Listener {
             }
         });
         
+        Button btnConnect = new Button("Connect...");
+        btnConnect.addStyleName(ValoTheme.BUTTON_LINK);
+        btnConnect.setIcon(FontAwesome.LINK);
+        btnConnect.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                controller.connect();
+            }
+        });
+        
         // add components
-        addComponent(btnConfig);
+        hl3.addComponent(btnConfig);
+        hl3.addComponent(btnConnect);
+        addComponent(hl3);
         hl2.addComponent(lstOutput);
         hl2.addComponent(lstPeople);
         hl.addComponent(lblNick);

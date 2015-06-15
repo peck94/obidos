@@ -29,17 +29,16 @@ public class Server extends Thread implements Listener {
 
     @Override
     public void run() {
-        // setup the socket
-        ServerSocket socket;
-        try{
-            socket = new ServerSocket(port);
-        }catch(Exception e) {
-            System.out.println(e);
-            return;
-        }
-        
         // as long as the server is running
         while(running) {
+            // setup the socket
+            ServerSocket socket;
+            try {
+                socket = new ServerSocket(port);
+            } catch (Exception e) {
+                System.out.println(e);
+                return;
+            }
             try{
                 // listen for an incoming connection
                 Socket client = socket.accept();
@@ -55,15 +54,6 @@ public class Server extends Thread implements Listener {
      */
     public void shutdown() {
         running = false;
-        interrupt();
-    }
-    
-    /**
-     * Restart the server.
-     */
-    public void restart() {
-        shutdown();
-        start();
     }
 
     @Override
@@ -73,7 +63,6 @@ public class Server extends Thread implements Listener {
         // check for a change in port number
         if(mainModel.getPort() != port) {
             this.port = mainModel.getPort();
-            restart();
         }
     }
 }

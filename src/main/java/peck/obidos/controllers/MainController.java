@@ -33,4 +33,8 @@ public class MainController extends Controller {
     public void settings() {
         getNavigator().navigateTo("config");
     }
+    
+    public void connect() {
+        getNavigator().navigateTo("connect");
+    }
 }
