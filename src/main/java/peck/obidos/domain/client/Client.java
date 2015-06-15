@@ -12,7 +12,7 @@ public class Client {
     // store socket
     private final Socket socket;
     // store model
-    private MainModel model;
+    private final MainModel model;
     
     /**
      * Init client.

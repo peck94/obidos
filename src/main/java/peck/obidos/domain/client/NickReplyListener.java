@@ -20,7 +20,6 @@ public class NickReplyListener extends MessageListener {
     @Override
     public void handle(SocketMessage msg) {
         String nick = msg.getMessage();
-        model.removePerson(msg.getSocket());
         model.addPerson(msg.getSocket(), new Person(nick));
     }
     

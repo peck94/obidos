@@ -62,12 +62,12 @@ public class ConnectionManager {
         // create communicator
         Communicator comm = new Communicator(client);
         
+        // send nick reply
+        comm.sendMessage(new NickReplyMessage(model));
+        
         // create monitor
         Monitor monitor = new Monitor(comm);
         monitor.start();
-        
-        // send nick reply
-        comm.sendMessage(new NickReplyMessage(model));
         
         // add to list
         connections.add(comm);
