@@ -9,8 +9,10 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
+import peck.obidos.controllers.ConfigController;
 import peck.obidos.controllers.MainController;
 import peck.obidos.models.MainModel;
+import peck.obidos.views.ConfigView;
 import peck.obidos.views.MainView;
 
 /**
@@ -29,10 +31,12 @@ public class ObidosUI extends UI {
         // setup view navigation
         navigator = new Navigator(this, this);
         navigator.addView("main",
-                new MainView(new MainController(model), model));
+                new MainView(new MainController(model, navigator), model));
+        navigator.addView("config",
+                new ConfigView(new ConfigController(model, navigator), model));
         
-        // navigate to main
-        navigator.navigateTo("main");
+        // navigate to initial view
+        navigator.navigateTo("config");
     }
 
     @WebServlet(urlPatterns = "/*", name = "ObidosUIServlet", asyncSupported = true)

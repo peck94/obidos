@@ -94,5 +94,6 @@ public class MainModel implements Observer {
     
     public void setUser(Person user) {
         this.user = user;
+        invalidate();
     }
 }

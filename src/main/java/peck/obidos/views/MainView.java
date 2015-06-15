@@ -5,6 +5,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -24,6 +25,7 @@ public final class MainView extends VerticalLayout implements View, Listener {
     private final MainModel model;
     // controls
     private ListSelect lstOutput;
+    private Label lblNick;
 
     public MainView(MainController controller, MainModel model) {
         this.controller = controller;
@@ -46,6 +48,7 @@ public final class MainView extends VerticalLayout implements View, Listener {
         
         // chat input
         final TextField txtInput = new TextField();
+        lblNick = new Label();
         
         // chat button
         Button btnSend = new Button("Send");
@@ -58,8 +61,19 @@ public final class MainView extends VerticalLayout implements View, Listener {
             }
         });
         
+        // menu
+        Button btnConfig = new Button("Settings");
+        btnConfig.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                controller.settings();
+            }
+        });
+        
         // add components
+        addComponent(btnConfig);
         addComponent(lstOutput);
+        hl.addComponent(lblNick);
         hl.addComponent(txtInput);
         hl.addComponent(btnSend);
         addComponent(hl);
@@ -73,9 +87,15 @@ public final class MainView extends VerticalLayout implements View, Listener {
     public void update(Object model) {
         MainModel mainModel = (MainModel) model;
         
+        // update messages
         lstOutput.clear();
         for(Message m: mainModel.getMessages()) {
             lstOutput.addItem(m);
+        }
+        
+        // update nickname
+        if(mainModel.getUser() != null) {
+            lblNick.setValue(mainModel.getUser().getNick());
         }
     }
     

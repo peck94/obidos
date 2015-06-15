@@ -1,5 +1,6 @@
 package peck.obidos.controllers;
 
+import com.vaadin.navigator.Navigator;
 import peck.obidos.models.MainModel;
 import peck.obidos.models.messages.ChatMessage;
 
@@ -7,7 +8,7 @@ import peck.obidos.models.messages.ChatMessage;
  * Controller for the main view.
  * @author jonathan
  */
-public class MainController {
+public class MainController extends Controller {
     // store the model
     private final MainModel model;
     
@@ -15,7 +16,8 @@ public class MainController {
      * Init the controller.
      * @param model Model to use
      */
-    public MainController(MainModel model) {
+    public MainController(MainModel model, Navigator navigator) {
+        super(navigator);
         this.model = model;
     }
     
@@ -26,5 +28,9 @@ public class MainController {
     public void sendMessage(String input) {
         // add the message to the model
         model.addMessage(new ChatMessage(input));
+    }
+    
+    public void settings() {
+        getNavigator().navigateTo("config");
     }
 }
