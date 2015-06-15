@@ -1,7 +1,9 @@
 package peck.obidos.domain.server;
 
+import com.vaadin.ui.Notification;
 import java.net.ServerSocket;
 import java.net.Socket;
+import peck.obidos.domain.ConnectionManager;
 import peck.obidos.domain.Listener;
 import peck.obidos.models.MainModel;
 
@@ -12,8 +14,6 @@ import peck.obidos.models.MainModel;
 public class Server extends Thread implements Listener {
     // store model
     private final MainModel model;
-    // store connection manager
-    private final ConnectionManager manager;
     // store state
     private boolean running;
     private int port;
@@ -22,7 +22,6 @@ public class Server extends Thread implements Listener {
         this.model = model;
         this.running = true;
         this.port = model.getPort();
-        this.manager = new ConnectionManager();
         
         model.addListener(this);
     }
@@ -37,12 +36,14 @@ public class Server extends Thread implements Listener {
                 socket = new ServerSocket(port);
             } catch (Exception e) {
                 System.out.println(e);
+                Notification.show("Server error.\n" + e.getLocalizedMessage(),
+                        Notification.Type.ERROR_MESSAGE);
                 return;
             }
             try{
                 // listen for an incoming connection
                 Socket client = socket.accept();
-                manager.addConnection(client, model);
+                model.getManager().addConnection(client, model);
             }catch(Exception e) {
                 System.out.println(e);
             }

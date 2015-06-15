@@ -26,8 +26,13 @@ public class MainController extends Controller {
      * @param input The message to send.
      */
     public void sendMessage(String input) {
-        // add the message to the model
-        model.addMessage(new ChatMessage(input));
+        // create message
+        ChatMessage msg = new ChatMessage(input);
+        
+        // send to all
+        model.getManager().sendMessage(msg);
+        // add to model
+        model.addMessage(msg);
     }
     
     public void settings() {

@@ -27,6 +27,7 @@ public class MessageHandler implements Observer {
     }
     
     public void dispatch(SocketMessage msg) {
+        System.out.println("Received: " + msg);
         for(Listener l: listeners) {
             l.update(msg);
         }

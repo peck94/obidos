@@ -36,7 +36,7 @@ public class ObidosUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         // init model
         MainModel model = new MainModel();
-        model.setPort(1337);
+        model.setPort(1340);
         
         // init listeners
         MessageHandler.get().addListener(new ChatMessageListener(model));

@@ -1,10 +1,11 @@
-package peck.obidos.domain.server;
+package peck.obidos.domain;
 
 import java.io.IOException;
 import java.net.Socket;
-import peck.obidos.domain.Communicator;
-import peck.obidos.domain.Monitor;
+import java.util.LinkedList;
+import java.util.List;
 import peck.obidos.models.MainModel;
+import peck.obidos.models.messages.Message;
 import peck.obidos.models.messages.NickReplyMessage;
 
 /**
@@ -12,6 +13,13 @@ import peck.obidos.models.messages.NickReplyMessage;
  * @author jonathan
  */
 public class ConnectionManager {
+    // store list of connections
+    private List<Communicator> connections;
+    
+    public ConnectionManager() {
+        connections = new LinkedList<>();
+    }
+    
     /**
      * Initiate a new connection.
      * @param client Client to connect with.
@@ -28,5 +36,22 @@ public class ConnectionManager {
         
         // send nick reply
         comm.sendMessage(new NickReplyMessage(model));
+        
+        // add to list
+        connections.add(comm);
+    }
+    
+    /**
+     * Send a message to all connected folks.
+     * @param msg Message to send.
+     */
+    public void sendMessage(Message msg) {
+        for(Communicator c: connections) {
+            try{
+                c.sendMessage(msg);
+            }catch(Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 }

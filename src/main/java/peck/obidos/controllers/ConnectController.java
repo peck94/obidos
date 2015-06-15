@@ -23,7 +23,8 @@ public class ConnectController extends Controller {
             client.start();
             getNavigator().navigateTo("main");
         }catch(Exception e) {
-            Notification.show("Failed to connect.\n" + e.getLocalizedMessage());
+            Notification.show("Failed to connect.\n" + e.getLocalizedMessage(),
+                    Notification.Type.ERROR_MESSAGE);
         }
     }
     

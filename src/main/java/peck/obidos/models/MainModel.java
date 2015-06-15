@@ -3,11 +3,10 @@ package peck.obidos.models;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import peck.obidos.domain.ConnectionManager;
 import peck.obidos.domain.Listener;
 import peck.obidos.domain.Observer;
 import peck.obidos.models.messages.Message;
@@ -27,6 +26,8 @@ public class MainModel implements Observer {
     private Person user;
     // store server config
     private int port;
+    // store connections
+    private ConnectionManager manager;
     
     public MainModel() {
         // init listeners
@@ -35,6 +36,8 @@ public class MainModel implements Observer {
         messages = new ArrayList<>();
         // init people
         people = new HashMap<>();
+        // init manager
+        manager = new ConnectionManager();
     }
     
     @Override
@@ -51,6 +54,14 @@ public class MainModel implements Observer {
         for(Listener l: listeners) {
             l.update(this);
         }
+    }
+    
+    public ConnectionManager getManager() {
+        return manager;
+    }
+    
+    public void setManager(ConnectionManager manager) {
+        this.manager = manager;
     }
     
     /**

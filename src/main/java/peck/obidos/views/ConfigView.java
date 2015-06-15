@@ -70,7 +70,8 @@ public final class ConfigView extends VerticalLayout implements View {
                     port = Integer.parseInt(txtPort.getValue());
                     controller.save(nick, port);
                 }catch(NumberFormatException e) {
-                    Notification.show("Invalid port number.");
+                    Notification.show("Invalid port number.",
+                            Notification.Type.ERROR_MESSAGE);
                 }
             }
             
