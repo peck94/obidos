@@ -13,6 +13,10 @@ import com.vaadin.ui.UI;
 import peck.obidos.controllers.ConfigController;
 import peck.obidos.controllers.ConnectController;
 import peck.obidos.controllers.MainController;
+import peck.obidos.domain.client.ChatMessageListener;
+import peck.obidos.domain.client.MessageHandler;
+import peck.obidos.domain.client.NickReplyListener;
+import peck.obidos.domain.client.NickRequestListener;
 import peck.obidos.domain.server.Server;
 import peck.obidos.models.MainModel;
 import peck.obidos.views.ConfigView;
@@ -34,6 +38,11 @@ public class ObidosUI extends UI {
         MainModel model = new MainModel();
         model.setPort(1337);
         
+        // init listeners
+        MessageHandler.get().addListener(new ChatMessageListener(model));
+        MessageHandler.get().addListener(new NickReplyListener(model));
+        MessageHandler.get().addListener(new NickRequestListener(model));
+        
         // init server
         Server server = new Server(model);
         server.start();
@@ -45,7 +54,7 @@ public class ObidosUI extends UI {
         navigator.addView("config",
                 new ConfigView(new ConfigController(model, navigator), model));
         navigator.addView("connect",
-                new ConnectView(new ConnectController(navigator)));
+                new ConnectView(new ConnectController(model, navigator)));
         
         // navigate to initial view
         navigator.navigateTo("config");

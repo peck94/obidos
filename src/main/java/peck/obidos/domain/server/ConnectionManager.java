@@ -2,11 +2,8 @@ package peck.obidos.domain.server;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import peck.obidos.domain.Communicator;
-import peck.obidos.models.MainModel;
-import peck.obidos.models.Person;
+import peck.obidos.domain.Monitor;
 
 /**
  * Manages connections with rmeote clients.

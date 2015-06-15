@@ -1,6 +1,5 @@
-package peck.obidos.domain.server;
+package peck.obidos.domain;
 
-import peck.obidos.domain.Communicator;
 import peck.obidos.domain.client.MessageHandler;
 import peck.obidos.models.messages.SocketMessage;
 

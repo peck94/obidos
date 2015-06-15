@@ -15,7 +15,6 @@ public abstract class MessageListener implements Listener {
     
     public MessageListener(Type type) {
         this.type = type;
-        MessageHandler.get().addListener(this);
     }
 
     @Override
