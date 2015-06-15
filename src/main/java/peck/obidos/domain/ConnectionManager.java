@@ -2,6 +2,7 @@ package peck.obidos.domain;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import peck.obidos.models.MainModel;
@@ -15,9 +16,40 @@ import peck.obidos.models.messages.NickReplyMessage;
 public class ConnectionManager {
     // store list of connections
     private List<Communicator> connections;
+    // store model
+    private MainModel model;
     
-    public ConnectionManager() {
+    /**
+     * Continuously checks for dead connections.
+     */
+    private class Pinger extends Thread {
+        @Override
+        public void run() {
+            while(true) {
+                Iterator<Communicator> itr = connections.iterator();
+                while(itr.hasNext()) {
+                    Communicator c = itr.next();
+                    if(!c.isConnected()) {
+                        model.removePerson(c.getSocket());
+                        itr.remove();
+                    }
+                }
+                try{
+                    Thread.sleep(1000);
+                }catch(Exception e) {
+                    System.out.println(e);
+                    break;
+                }
+            }
+        }
+    }
+    
+    public ConnectionManager(MainModel model) {
         connections = new LinkedList<>();
+        this.model = model;
+        
+        Pinger p = new Pinger();
+        p.start();
     }
     
     /**

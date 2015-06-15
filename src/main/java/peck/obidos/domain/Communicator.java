@@ -14,10 +14,10 @@ import peck.obidos.models.messages.SocketMessage;
  */
 public class Communicator {
     // store socket
-    private Socket socket;
+    private final Socket socket;
     // store streams
-    private ObjectOutputStream output;
-    private ObjectInputStream input;
+    private final ObjectOutputStream output;
+    private final ObjectInputStream input;
 
     /**
      * Setup a connection through a socket.
@@ -28,6 +28,10 @@ public class Communicator {
         this.socket = socket;
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
+    }
+    
+    public Socket getSocket() {
+        return socket;
     }
     
     /**

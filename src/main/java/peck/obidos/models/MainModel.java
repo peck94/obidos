@@ -37,7 +37,7 @@ public class MainModel implements Observer {
         // init people
         people = new HashMap<>();
         // init manager
-        manager = new ConnectionManager();
+        manager = new ConnectionManager(this);
     }
     
     @Override
