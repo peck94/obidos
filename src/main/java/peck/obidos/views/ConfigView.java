@@ -32,6 +32,7 @@ public final class ConfigView extends VerticalLayout implements View {
     }
     
     public void init() {
+        setSizeFull();
         HorizontalLayout hl = new HorizontalLayout();
         
         Label lblTitle = new Label("Settings");
