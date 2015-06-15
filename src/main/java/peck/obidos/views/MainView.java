@@ -11,7 +11,7 @@ import com.vaadin.ui.VerticalLayout;
 import peck.obidos.controllers.MainController;
 import peck.obidos.domain.Listener;
 import peck.obidos.models.MainModel;
-import peck.obidos.models.Message;
+import peck.obidos.models.messages.Message;
 
 /**
  * View for the main part of the application.

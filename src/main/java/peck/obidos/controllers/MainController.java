@@ -1,7 +1,7 @@
 package peck.obidos.controllers;
 
 import peck.obidos.models.MainModel;
-import peck.obidos.models.Message;
+import peck.obidos.models.messages.ChatMessage;
 
 /**
  * Controller for the main view.
@@ -25,6 +25,6 @@ public class MainController {
      */
     public void sendMessage(String input) {
         // add the message to the model
-        model.addMessage(new Message(input));
+        model.addMessage(new ChatMessage(input));
     }
 }

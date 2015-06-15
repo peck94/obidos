@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import peck.obidos.domain.Listener;
 import peck.obidos.domain.Observer;
+import peck.obidos.models.messages.Message;
 
 /**
  * Model for the main view.
