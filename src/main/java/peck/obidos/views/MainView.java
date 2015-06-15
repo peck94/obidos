@@ -2,6 +2,7 @@ package peck.obidos.views;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
@@ -9,6 +10,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import peck.obidos.controllers.MainController;
 import peck.obidos.domain.Listener;
 import peck.obidos.models.MainModel;
@@ -52,6 +54,8 @@ public final class MainView extends VerticalLayout implements View, Listener {
         
         // chat button
         Button btnSend = new Button("Send");
+        btnSend.addStyleName(ValoTheme.BUTTON_PRIMARY);
+        btnSend.setIcon(FontAwesome.SEND);
         btnSend.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {
@@ -63,6 +67,8 @@ public final class MainView extends VerticalLayout implements View, Listener {
         
         // menu
         Button btnConfig = new Button("Settings");
+        btnConfig.addStyleName(ValoTheme.BUTTON_LINK);
+        btnConfig.setIcon(FontAwesome.COGS);
         btnConfig.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(ClickEvent event) {

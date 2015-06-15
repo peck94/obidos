@@ -3,6 +3,7 @@ package peck.obidos;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
@@ -18,6 +19,7 @@ import peck.obidos.views.MainView;
 /**
  * Main application class.
  */
+@Title("Obidos")
 @Theme("valo")
 @Widgetset("peck.obidos.ObidosWidgetSet")
 public class ObidosUI extends UI {
