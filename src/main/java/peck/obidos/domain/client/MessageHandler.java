@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import peck.obidos.domain.Listener;
 import peck.obidos.domain.Observer;
+import peck.obidos.models.messages.SocketMessage;
 
 /**
  * Dispatches incoming messages to the appropriate listeners.
@@ -23,6 +24,12 @@ public class MessageHandler implements Observer {
         }
         
         return instance;
+    }
+    
+    public void dispatch(SocketMessage msg) {
+        for(Listener l: listeners) {
+            l.update(msg);
+        }
     }
     
     @Override

@@ -4,23 +4,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.LinkedList;
-import java.util.List;
 import peck.obidos.models.messages.Message;
+import peck.obidos.models.messages.SocketMessage;
 
 /**
  * This class is responsible for sending and receiving serialized messages
  * over a socket.
  * @author jonathan
  */
-public class Communicator implements Observer {
+public class Communicator {
     // store socket
     private Socket socket;
     // store streams
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    // store listeners
-    private List<Listener> listeners;
 
     /**
      * Setup a connection through a socket.
@@ -31,7 +28,6 @@ public class Communicator implements Observer {
         this.socket = socket;
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
-        listeners = new LinkedList<>();
     }
     
     /**
@@ -44,15 +40,20 @@ public class Communicator implements Observer {
         output.flush();
     }
     
-    public Message recvMessage() throws IOException {
-        Message msg;
+    public SocketMessage recvMessage() throws IOException {
+        SocketMessage msg;
         try{
-            msg = (Message) input.readObject();
+            Message msg1 = (Message) input.readObject();
+            msg = new SocketMessage(msg1.getMessage(), msg1.getType(), socket);
         }catch(ClassNotFoundException e) {
             msg = null;
         }
         
         return msg;
+    }
+    
+    public boolean isConnected() {
+        return socket.isConnected();
     }
     
     /**
@@ -62,21 +63,5 @@ public class Communicator implements Observer {
     public void close() throws IOException {
         output.close();
         socket.close();
-    }
-
-    @Override
-    public void addListener(Listener l) {
-        listeners.add(l);
-    }
-
-    @Override
-    public void removeListener(Listener l) {
-        listeners.remove(l);
-    }
-
-    public void invalidate(Message msg) {
-        for(Listener l: listeners) {
-            l.update(msg);
-        }
     }
 }

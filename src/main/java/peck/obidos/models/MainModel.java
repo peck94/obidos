@@ -1,9 +1,12 @@
 package peck.obidos.models;
 
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import peck.obidos.domain.Listener;
 import peck.obidos.domain.Observer;
@@ -18,8 +21,8 @@ public class MainModel implements Observer {
     private List<Listener> listeners;
     // store list of chat messages
     private List<Message> messages;
-    // store set of persons
-    private Set<Person> people;
+    // store map of persons
+    private Map<Socket, Person> people;
     // store own persona
     private Person user;
     // store server config
@@ -31,7 +34,7 @@ public class MainModel implements Observer {
         // init message list
         messages = new ArrayList<>();
         // init people
-        people = new HashSet<>();
+        people = new HashMap<>();
     }
     
     @Override
@@ -68,25 +71,28 @@ public class MainModel implements Observer {
     
     /**
      * Add a person to the model.
+     * @param s Socket of person.
      * @param p Person to add.
      */
-    public void addPerson(Person p) {
-        people.add(p);
+    public void addPerson(Socket s, Person p) {
+        people.put(s, p);
+        invalidate();
     }
     
     /**
      * Remove person from the model.
-     * @param p Person to remove.
+     * @param s Socket of person to remove.
      */
-    public void removePerson(Person p) {
-        people.remove(p);
+    public void removePerson(Socket s) {
+        people.remove(s);
+        invalidate();
     }
     
     /**
      * @return List of people.
      */
-    public Set<Person> getPeople() {
-        return new HashSet<>(people);
+    public Map<Socket, Person> getPeople() {
+        return new HashMap<>(people);
     }
     
     public Person getUser() {

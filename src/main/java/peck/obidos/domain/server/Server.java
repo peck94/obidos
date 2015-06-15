@@ -22,7 +22,7 @@ public class Server extends Thread implements Listener {
         this.model = model;
         this.running = true;
         this.port = model.getPort();
-        this.manager = new ConnectionManager(model);
+        this.manager = new ConnectionManager();
         
         model.addListener(this);
     }
