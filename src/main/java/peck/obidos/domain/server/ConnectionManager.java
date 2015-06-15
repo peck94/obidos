@@ -38,5 +38,8 @@ public class ConnectionManager {
         
         // add to map
         connections.put(person, comm);
+        
+        // update model
+        model.addPerson(person);
     }
 }

@@ -12,6 +12,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import peck.obidos.controllers.ConfigController;
 import peck.obidos.controllers.MainController;
+import peck.obidos.domain.server.Server;
 import peck.obidos.models.MainModel;
 import peck.obidos.views.ConfigView;
 import peck.obidos.views.MainView;

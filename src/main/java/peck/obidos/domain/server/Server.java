@@ -13,7 +13,7 @@ public class Server extends Thread implements Listener {
     // store model
     private final MainModel model;
     // store connection manager
-    private ConnectionManager manager;
+    private final ConnectionManager manager;
     // store state
     private boolean running;
     private int port;

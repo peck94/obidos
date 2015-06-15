@@ -26,7 +26,7 @@ public final class MainView extends VerticalLayout implements View, Listener {
     // store model
     private final MainModel model;
     // controls
-    private ListSelect lstOutput;
+    private ListSelect lstOutput, lstPeople;
     private Label lblNick;
 
     public MainView(MainController controller, MainModel model) {
@@ -41,6 +41,14 @@ public final class MainView extends VerticalLayout implements View, Listener {
         setSizeFull();
         
         HorizontalLayout hl = new HorizontalLayout();
+        HorizontalLayout hl2 = new HorizontalLayout();
+        hl2.setSizeFull();
+        
+        // people in chat
+        lstPeople = new ListSelect();
+        lstPeople.setWidth("100%");
+        lstPeople.setHeight("100%");
+        lstPeople.setRows(10);
         
         // chat log
         lstOutput = new ListSelect();
@@ -78,10 +86,12 @@ public final class MainView extends VerticalLayout implements View, Listener {
         
         // add components
         addComponent(btnConfig);
-        addComponent(lstOutput);
+        hl2.addComponent(lstOutput);
+        hl2.addComponent(lstPeople);
         hl.addComponent(lblNick);
         hl.addComponent(txtInput);
         hl.addComponent(btnSend);
+        addComponent(hl2);
         addComponent(hl);
     }
 
