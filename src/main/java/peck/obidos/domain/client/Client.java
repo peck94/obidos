@@ -37,10 +37,8 @@ public class Client {
         // create monitor
         Monitor monitor = new Monitor(comm);
         monitor.start();
-        
-        // send request for nick
-        comm.sendMessage(new NickRequestMessage());
-        // send own nick
+
+        // send nick reply
         comm.sendMessage(new NickReplyMessage(model));
     }
 }

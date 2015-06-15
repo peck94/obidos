@@ -42,7 +42,7 @@ public class Server extends Thread implements Listener {
             try{
                 // listen for an incoming connection
                 Socket client = socket.accept();
-                manager.addConnection(client);
+                manager.addConnection(client, model);
             }catch(Exception e) {
                 System.out.println(e);
             }

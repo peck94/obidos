@@ -27,6 +27,7 @@ public class ConnectView extends VerticalLayout implements View {
     public void init() {
         HorizontalLayout hl = new HorizontalLayout();
         HorizontalLayout hl2 = new HorizontalLayout();
+        HorizontalLayout hl3 = new HorizontalLayout();
         
         final TextField txtHost = new TextField();
         
@@ -69,7 +70,9 @@ public class ConnectView extends VerticalLayout implements View {
         addComponent(lblTitle);
         addComponent(hl);
         addComponent(hl2);
-        addComponent(btnConnect);
+        hl3.addComponent(btnConnect);
+        hl3.addComponent(btnCancel);
+        addComponent(hl3);
     }
 
     @Override
