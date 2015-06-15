@@ -30,6 +30,11 @@ public class ObidosUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         // init model
         MainModel model = new MainModel();
+        model.setPort(1337);
+        
+        // init server
+        Server server = new Server(model);
+        server.start();
         
         // setup view navigation
         navigator = new Navigator(this, this);

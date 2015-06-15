@@ -9,7 +9,7 @@ import peck.obidos.models.messages.SocketMessage;
  * General listener for messages.
  * @author jonathan
  */
-public abstract class MessageListener extends Thread implements Listener {
+public abstract class MessageListener implements Listener {
     // type of message to listen for
     private final Type type;
     
