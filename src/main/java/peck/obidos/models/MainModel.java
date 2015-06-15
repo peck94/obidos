@@ -22,6 +22,8 @@ public class MainModel implements Observer {
     private Set<Person> people;
     // store own persona
     private Person user;
+    // store server config
+    private int port;
     
     public MainModel() {
         // init listeners
@@ -94,6 +96,15 @@ public class MainModel implements Observer {
     
     public void setUser(Person user) {
         this.user = user;
+        invalidate();
+    }
+    
+    public int getPort() {
+        return port;
+    }
+    
+    public void setPort(int port) {
+        this.port = port;
         invalidate();
     }
 }

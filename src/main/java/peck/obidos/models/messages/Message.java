@@ -14,7 +14,9 @@ public class Message implements Serializable {
     
     public enum Type {
         // chat message
-        CHAT
+        CHAT,
+        // request nickname
+        REQUEST_NICK
     }
     
     /**
