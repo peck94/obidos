@@ -16,7 +16,9 @@ public class Message implements Serializable {
         // chat message
         CHAT,
         // request nickname
-        REQUEST_NICK
+        REQUEST_NICK,
+        // answer nickname
+        REPLY_NICK
     }
     
     /**

@@ -1,8 +1,9 @@
 package peck.obidos.domain.client;
 
+import peck.obidos.domain.Communicator;
 import peck.obidos.models.MainModel;
-import peck.obidos.models.Person;
 import peck.obidos.models.messages.Message;
+import peck.obidos.models.messages.NickReplyMessage;
 import peck.obidos.models.messages.SocketMessage;
 
 /**
@@ -19,9 +20,12 @@ public class NickRequestListener extends MessageListener {
 
     @Override
     public void handle(SocketMessage msg) {
-        String nick = msg.getMessage();
-        model.removePerson(msg.getSocket());
-        model.addPerson(msg.getSocket(), new Person(nick));
+        try{
+            Communicator c = new Communicator(msg.getSocket());
+            c.sendMessage(new NickReplyMessage(model));
+        }catch(Exception e) {
+            System.out.println(e);
+        }
     }
     
 }
