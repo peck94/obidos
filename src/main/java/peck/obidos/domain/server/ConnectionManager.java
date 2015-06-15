@@ -31,7 +31,7 @@ public class ConnectionManager {
      */
     public void addConnection(Socket client) throws IOException {
         // create communicator
-        ChatCommunicator comm = new ChatCommunicator(new Communicator(client));
+        ChatCommunicator comm = new ChatCommunicator(client);
         
         // create person
         Person person = new Person(comm.getNick());

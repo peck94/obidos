@@ -16,10 +16,4 @@ public interface Observer {
      * @param l Listener to remove.
      */
     void removeListener(Listener l);
-    
-    /**
-     * Invalidate the observer.
-     * This should notify all listeners.
-     */
-    void invalidate();
 }

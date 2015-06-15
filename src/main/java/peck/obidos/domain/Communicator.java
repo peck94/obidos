@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
 import peck.obidos.models.messages.Message;
 
 /**
@@ -11,13 +13,15 @@ import peck.obidos.models.messages.Message;
  * over a socket.
  * @author jonathan
  */
-public class Communicator {
+public class Communicator implements Observer {
     // store socket
     private Socket socket;
     // store streams
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    
+    // store listeners
+    private List<Listener> listeners;
+
     /**
      * Setup a connection through a socket.
      * @param socket Socket to use
@@ -27,6 +31,7 @@ public class Communicator {
         this.socket = socket;
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
+        listeners = new LinkedList<>();
     }
     
     /**
@@ -57,5 +62,21 @@ public class Communicator {
     public void close() throws IOException {
         output.close();
         socket.close();
+    }
+
+    @Override
+    public void addListener(Listener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeListener(Listener l) {
+        listeners.remove(l);
+    }
+
+    public void invalidate(Message msg) {
+        for(Listener l: listeners) {
+            l.update(msg);
+        }
     }
 }

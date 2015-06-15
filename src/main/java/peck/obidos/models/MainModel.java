@@ -44,7 +44,6 @@ public class MainModel implements Observer {
         listeners.remove(l);
     }
 
-    @Override
     public void invalidate() {
         for(Listener l: listeners) {
             l.update(this);

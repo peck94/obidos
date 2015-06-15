@@ -1,6 +1,7 @@
 package peck.obidos.domain;
 
 import java.io.IOException;
+import java.net.Socket;
 import peck.obidos.models.messages.Message;
 import peck.obidos.models.messages.NickRequestMessage;
 
@@ -8,12 +9,9 @@ import peck.obidos.models.messages.NickRequestMessage;
  * This class decorates the Communicator with auxiliary methods.
  * @author jonathan
  */
-public class ChatCommunicator {
-    // store communicator
-    private final Communicator communicator;
-    
-    public ChatCommunicator(Communicator communicator) {
-        this.communicator = communicator;
+public class ChatCommunicator extends Communicator {
+    public ChatCommunicator(Socket client) throws IOException {
+        super(client);
     }
     
     /**
@@ -23,9 +21,9 @@ public class ChatCommunicator {
      */
     public String getNick() throws IOException {
         Message out = new NickRequestMessage();
-        communicator.sendMessage(out);
+        sendMessage(out);
         
-        Message in = communicator.recvMessage();
+        Message in = recvMessage();
         return in.getMessage();
     }
 }
